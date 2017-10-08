@@ -1,8 +1,4 @@
 ---
-- include: user.yml
-- include: git.yml
-- include: vim.yml
-
 - name: install utilities
   action: >
           {{ ansible_pkg_mgr }} name={{ item }} state=present update_cache=yes
@@ -13,12 +9,15 @@
           - htop
           - nmap
           - ntp
-          - openssh
           - rsync
           - direnv
           - base-devel
           - cmake
   become: yes
+
+- include: user.yml
+- include: git.yml
+- include: vim.yml
 
 - name: enable network time
   service: name=ntpd state=started enabled=yes
