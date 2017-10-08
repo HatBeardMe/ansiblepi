@@ -1,0 +1,216 @@
+" Enable Vim features
+set nocompatible
+
+" Use spacebar as the leader key
+nnoremap <SPACE> <Nop>
+let mapleader="\<Space>"
+
+" BEGIN VUNDLE CONFIG
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Vundle, a plugin manager for vim
+Plugin 'gmarik/Vundle.vim'
+
+" Base16 colorscheme
+Plugin 'chriskempson/base16-vim'
+
+" Syntastic syntax checking
+" Install developer tools for syntax checking
+" Install flake8 for Python PEP8
+Plugin 'scrooloose/syntastic'
+
+" YouCompleteMe completions
+Plugin 'Valloric/YouCompleteMe'
+" If YCM is unavailable for your platform, try SuperTab instead
+"Plugin 'ervandew/supertab'
+
+" File tree
+" Use :NERDTree to open the tree
+Plugin 'scrooloose/nerdtree'
+
+" Sublime Text style multiple cursors
+" Use Ctrl+n to highlight matches and Ctrl+b to undo highlight
+Plugin 'terryma/vim-multiple-cursors'
+
+" Fancy statusbar
+" Powerline fonts recommended
+Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
+
+" Git integration
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+
+" CtrlP fuzzy search
+" Use Ctrl+P to search a project for a file
+Plugin 'ctrlpvim/ctrlp.vim'
+
+" Ansible syntax and indentation
+Plugin 'chase/vim-ansible-yaml'
+
+" Salt syntax and indentation
+Plugin 'saltstack/salt-vim'
+
+" Go syntax and features
+Plugin 'fatih/vim-go'
+
+" Automatically close parentheses, etc.
+Plugin 'Raimondi/delimitMate'
+
+" Hotkeys for commenting/uncommenting
+" g-c-c to toggle a line, g-c-Motion to toggle a motion
+Plugin 'tpope/vim-commentary'
+
+" Markdown Preview
+" Use :PrevimOpen while editing Markdown to open a live preview
+Plugin 'kannokanno/previm'
+
+" Highlight trailing whitespace
+" Use :StripWhitespace to remove trailing shitespace
+Plugin 'ntpeters/vim-better-whitespace'
+
+" Jump around Vimium-style
+" Use Leader-Leader-Motion <target> to jump around
+Plugin 'easymotion/vim-easymotion'
+
+" Automatically detect indentation settings
+Plugin 'tpope/vim-sleuth'
+
+" Ack/Ag search
+Plugin 'mileszs/ack.vim'
+
+" Better JSON
+Plugin 'elzr/vim-json'
+
+" Prometheus rules syntax highlighting
+Plugin 'skreuzer/vim-prometheus'
+
+call vundle#end()
+filetype plugin indent on
+" END VUNDLE CONFIG
+
+" Allow the use of project-specific vimrc
+set exrc
+set secure
+
+" Color scheme
+" Requires https://github.com/chriskempson/base16-shell
+if filereadable(expand("~/.vimrc_background"))
+    let base16colorspace=256
+    source ~/.vimrc_background
+endif
+syntax on
+
+" Unicode, because this is the future
+set encoding=utf-8
+
+" Sane defaults for indentation
+set tabstop=4
+
+" Show line numbers
+set number
+
+" Highlight current line
+set cursorline
+
+" Highlight columns 80 and 120
+set colorcolumn=80,120
+
+" Allow mouse
+set mouse=a
+
+" Spell check
+set spell
+set spellsuggest=best,10
+
+" Wrap searches
+set wrapscan
+
+" Smart search case sensitivity
+set ignorecase
+set smartcase
+
+" Show completions when using commands like :edit
+set wildmenu
+
+" Allow switching buffer even if current buffer contains unsaved changes
+set hidden
+
+" Disable scratch preview window
+set completeopt-=preview
+
+" Use Alt+hjkl to switch between windows
+nmap <silent> <A-h> :wincmd h<CR>
+nmap <silent> <A-j> :wincmd j<CR>
+nmap <silent> <A-k> :wincmd k<CR>
+nmap <silent> <A-l> :wincmd l<CR>
+
+" Disable some useless commands
+cnoreabbrev X x
+map Q <Nop>
+
+" Airline tweaks
+" Always show statusline
+set laststatus=2
+" Use Powerline fonts
+let g:airline_powerline_fonts = 1
+
+" CtrlP tweaks
+" Ignore certain filetypes
+set wildignore+=*.pyc
+" keybinds
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" Multiple cursors tweaks
+" Since we bound Ctrl+P, we have to rebind previous selection
+let g:multi_cursor_prev_key='<C-b>'
+
+" Command to open browser for Markdown Preview
+let g:previm_open_cmd = 'google-chrome-stable'
+
+" YouCompleteMe tweaks
+let g:ycm_python_binary_path='python'
+cnoreabbrev ycm YcmCompleter
+
+" Syntastic Tweaks
+" Display a statusline message if errors are detected
+let g:syntastic_stl_format = '%E{Errors: %e}%B{,}%W{Warnings: %w}'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+" Automatically populate the list of error -> line number mappings
+" (Disabled by default for compatibility)
+let g:syntastic_always_populate_loc_list = 1
+" Check files when they are opened
+let g:syntastic_check_on_open = 1
+" Don't check files when they are closed
+let g:syntastic_check_on_wq = 0
+" Don't check for long lines in Python files
+let g:syntastic_python_flake8_args='--ignore=E501'
+" Don't check for non-constant source in Shell files
+let g:syntastic_sh_shellcheck_args='--exclude SC1090'
+
+" GitGutter tweaks
+" Display diff markers between index and HEAD
+let g:gitgutter_diff_args = ' HEAD '
+
+" If using SuperTab instead of YCM, list completions top-to-bottom
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" Ack.vim tweaks
+" Use Ag if available
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+    cnoreabbrev Ag Ack
+endif
+
+" JSON tweaks
+" High contrast colors (dark theme assumed)
+highlight jsonKeyword ctermfg=Blue
+highlight jsonString ctermfg=Yellow
+highlight jsonNumber ctermfg=Red
+highlight jsonBoolean ctermfg=Red
+highlight jsonNull ctermfg=Red
