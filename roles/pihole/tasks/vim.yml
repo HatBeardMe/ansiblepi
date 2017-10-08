@@ -1,0 +1,35 @@
+---
+- name: install vim
+  action: >
+          {{ ansible_pkg_mgr }} name=vim state=present update_cache=yes
+
+- name: create .vimrc directory
+  file: path="/home/{{ system_username }}/.vim/bundle" owner={{ system_username }} group=users state=directory
+  become: yes
+  become_user: "{{ system_username }}"
+
+- name: install Vundle
+  git: repo=https://github.com/gmarik/Vundle.vim.git dest="/home/{{ system_username }}/.vim/bundle/Vundle.vim" accept_hostkey=yes
+  become: yes
+  become_user: "{{ system_username }}"
+
+- name: configure .vimrc
+  copy: src=vimrc dest=/home/{{ system_username }}/.vimrc owner={{ system_username }} group=users
+  become: yes
+  become_user: "{{ system_username }}"
+
+- name: install and update Vundle plugins
+  command: "/usr/bin/vim +PluginUpdate +qall!"
+  become: yes
+  become_user: "{{ system_username }}"
+
+- name: install YouCompleteMe
+  command: "python /home/{{ system_username }}/.vim/bundle/YouCompleteMe/install.py"
+  args:
+          chdir: "/home/{{ system_username }}/.vim/bundle/YouCompleteMe"
+          become: yes
+          become_user: "{{ system_username }}"
+
+- name: install powerline fonts
+  action: >
+          {{ ansible_pkg_mgr }} name=powerline state=present
