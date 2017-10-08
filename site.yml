@@ -3,7 +3,7 @@
   roles:
           - pihole
   vars_prompt:
-          - name: "pihole_username"
+          - name: "system_username"
             prompt: "Enter your system username"
             private: no
           - name: "git_user_real_name"
