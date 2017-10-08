@@ -28,5 +28,6 @@
   with_items:
           - "*.swp"
           - "*.swo"
+          - ".envrc"
   become: yes
   become_user: "{{ system_username }}"
