@@ -1,4 +1,7 @@
 ---
+- name: Ensure correct kernel headers are installed.
+  shell: "apt-get -y install linux-headers-$(uname -r)"
+
 - name: install utilities
   action: >
           {{ ansible_pkg_mgr }} name={{ item }} state=present update_cache=yes
@@ -11,7 +14,7 @@
           - ntp
           - rsync
           - direnv
-          - base-devel
+          - build-essential
           - cmake
   become: yes
 
