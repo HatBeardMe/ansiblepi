@@ -16,6 +16,8 @@
           - openssh
           - rsync
           - direnv
+          - base-devel
+          - cmake
   become: yes
 
 - name: enable network time

@@ -24,7 +24,7 @@
   become_user: "{{ system_username }}"
 
 - name: configure global gitignore
-  lineinfile: path=/home/{{ system_username }}/.gitignore line={{ item }}
+  lineinfile: dest=/home/{{ system_username }}/.gitignore line={{ item }}
   with_items:
           - "*.swp"
           - "*.swo"

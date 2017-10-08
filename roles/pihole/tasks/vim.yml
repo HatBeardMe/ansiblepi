@@ -27,8 +27,8 @@
   command: "python /home/{{ system_username }}/.vim/bundle/YouCompleteMe/install.py"
   args:
           chdir: "/home/{{ system_username }}/.vim/bundle/YouCompleteMe"
-          become: yes
-          become_user: "{{ system_username }}"
+  become: yes
+  become_user: "{{ system_username }}"
 
 - name: install powerline fonts
   action: >
