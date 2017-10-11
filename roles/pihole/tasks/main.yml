@@ -3,7 +3,6 @@
   action: >
           {{ ansible_pkg_mgr }} name={{ item }} state=present update_cache=yes
   with_items:
-          - vim
           - tmux
           - curl
           - htop
@@ -14,14 +13,16 @@
           - raspberrypi-kernel-headers
           - build-essential
           - cmake
+          - vim
   become: yes
+
 
 - include: user.yml
 - include: git.yml
 - include: vim.yml
 
 - name: enable network time
-  service: name=ntpd state=started enabled=yes
+  service: name=ntp state=started enabled=yes
   become: yes
 
 - name: install shell colors

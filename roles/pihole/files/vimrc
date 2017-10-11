@@ -22,7 +22,7 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'scrooloose/syntastic'
 
 " YouCompleteMe completions
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 " If YCM is unavailable for your platform, try SuperTab instead
 "Plugin 'ervandew/supertab'
 
