@@ -1,0 +1,6 @@
+---
+- name: configure .tmux.conf
+  copy: src=tmux.conf dest=/home/{{ system_username }}/.tmux.conf owner={{ system_username }} group=users
+  become: yes
+  become_user: "{{ system_username }}"
+
