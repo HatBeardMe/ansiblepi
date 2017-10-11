@@ -1,0 +1,4 @@
+---
+- name: create normal user
+  user: name={{ system_username }} createhome=yes group=users groups=sudo update_password=always password=$6$.8pZJib2TRvOl.JO$mT1l7J9c1pNcteumQm7hgmdTzzRUUqryu9WzPkr0elnuTLGHouI5hXhyKemzcLzR1lKUHC0I6jNDnN3SM5RRQ0
+  become: yes
