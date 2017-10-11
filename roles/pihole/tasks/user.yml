@@ -1,4 +1,0 @@
----
-- name: create normal user
-  user: name={{ system_username }} createhome=yes group=users groups=sudo
-  become: yes

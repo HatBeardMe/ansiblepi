@@ -1,7 +1,7 @@
 - hosts: localhost
   connection: local
   roles:
-          - pihole
+          - base_system
   vars_prompt:
           - name: "system_username"
             prompt: "Enter your system username"
